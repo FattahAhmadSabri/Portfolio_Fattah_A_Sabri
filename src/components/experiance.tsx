@@ -1,22 +1,41 @@
 import React from 'react';
-import { 
-  Box, Typography, Container, Paper, Chip, 
-  Divider, useTheme, useMediaQuery, Avatar, Button 
+import {
+  Box, Typography, Container, Paper, Chip,
+  Divider, useTheme, useMediaQuery, Avatar, Button
 } from '@mui/material';
-import { Timeline, TimelineItem, TimelineSeparator, TimelineDot, 
-  TimelineConnector, TimelineContent, TimelineOppositeContent } from '@mui/lab';
-import { 
-  Code, Storage, Cloud, Settings, 
-  Terminal, DeveloperMode, Build, DataObject 
+import {
+  Timeline, TimelineItem, TimelineSeparator, TimelineDot,
+  TimelineConnector, TimelineContent, TimelineOppositeContent
+} from '@mui/lab';
+import {
+  Code, Storage, Cloud, Settings,
+  Terminal, DeveloperMode, Build, DataObject
 } from '@mui/icons-material';
 
-const ExperiencePage = () => {
+// Interfaces for type definitions
+interface Experience {
+  period: string;
+  company: string;
+  role: string;
+  description: string;
+  achievements: string[];
+  technologies: string[];
+}
+
+interface Skills {
+  [category: string]: string[];
+}
+
+interface TechIcons {
+  [key: string]: React.ReactNode;
+}
+
+const ExperiencePage: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
-  
-  // Experience timeline data
-  const experiences = [
+
+  const experiences: Experience[] = [
     {
       period: "2021 - Present",
       company: "Wattmonk Technologies",
@@ -55,8 +74,7 @@ const ExperiencePage = () => {
     }
   ];
 
-  // Skill categories
-  const skills = {
+  const skills: Skills = {
     languages: ["JavaScript/Node.js", "Python", "Java", "Go", "PHP"],
     frameworks: ["Express.js", "Django", "Spring Boot", "Flask", "Laravel"],
     databases: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Elasticsearch"],
@@ -64,8 +82,7 @@ const ExperiencePage = () => {
     tools: ["Git", "RabbitMQ", "Kafka", "GraphQL", "REST APIs"]
   };
 
-  // Technology icons
-  const techIcons = {
+  const techIcons: TechIcons = {
     "JavaScript/Node.js": <Terminal fontSize="large" />,
     "Node.js": <Terminal fontSize="large" />,
     "Python": <Code fontSize="large" />,
@@ -90,10 +107,10 @@ const ExperiencePage = () => {
       <Container maxWidth="lg">
         {/* Page Header */}
         <Box sx={{ textAlign: 'center', mb: 8 }}>
-          <Typography 
-            variant={isMobile ? 'h4' : 'h2'} 
-            sx={{ 
-              fontWeight: 800, 
+          <Typography
+            variant={isMobile ? 'h4' : 'h2'}
+            sx={{
+              fontWeight: 800,
               mb: 2,
               background: 'linear-gradient(45deg, #ff8a00, #e52e71)',
               WebkitBackgroundClip: 'text',
@@ -106,22 +123,22 @@ const ExperiencePage = () => {
           <Typography variant="h6" sx={{ color: theme.palette.grey[300], maxWidth: 700, mx: 'auto' }}>
             Crafting robust, scalable backend systems with cutting-edge technologies
           </Typography>
-          <Divider sx={{ 
-            my: 4, 
-            width: '100px', 
-            height: '4px', 
-            background: 'linear-gradient(45deg, #00c9ff, #92fe9d)', 
+          <Divider sx={{
+            my: 4,
+            width: '100px',
+            height: '4px',
+            background: 'linear-gradient(45deg, #00c9ff, #92fe9d)',
             mx: 'auto',
             borderRadius: 2
           }} />
         </Box>
 
-        {/* Experience Timeline */}
+        {/* Timeline */}
         <Box sx={{ mb: 10 }}>
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 4, color: '#fff' }}>
             Professional Journey
           </Typography>
-          
+
           <Timeline position={isMobile ? "right" : "alternate"} sx={{ p: 0 }}>
             {experiences.map((exp, index) => (
               <TimelineItem key={index}>
@@ -131,10 +148,10 @@ const ExperiencePage = () => {
                   variant="body2"
                   color="text.secondary"
                 >
-                  <Typography 
-                    variant="h6" 
-                    sx={{ 
-                      color: theme.palette.grey[300], 
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      color: theme.palette.grey[300],
                       fontWeight: 600,
                       background: 'rgba(255,255,255,0.1)',
                       p: 1,
@@ -145,11 +162,11 @@ const ExperiencePage = () => {
                     {exp.period}
                   </Typography>
                 </TimelineOppositeContent>
-                
+
                 <TimelineSeparator>
-                  <TimelineDot 
-                    sx={{ 
-                      backgroundColor: '#00c9ff', 
+                  <TimelineDot
+                    sx={{
+                      backgroundColor: '#00c9ff',
                       boxShadow: '0 0 10px rgba(0,201,255,0.5)',
                       width: 24,
                       height: 24,
@@ -158,11 +175,11 @@ const ExperiencePage = () => {
                       justifyContent: 'center'
                     }}
                   >
-                    <Avatar 
-                      sx={{ 
-                        bgcolor: 'transparent', 
-                        color: '#fff', 
-                        width: 16, 
+                    <Avatar
+                      sx={{
+                        bgcolor: 'transparent',
+                        color: '#fff',
+                        width: 16,
                         height: 16,
                         fontSize: '0.8rem'
                       }}
@@ -174,12 +191,12 @@ const ExperiencePage = () => {
                     <TimelineConnector sx={{ bgcolor: '#00c9ff', height: '40px' }} />
                   )}
                 </TimelineSeparator>
-                
+
                 <TimelineContent sx={{ py: '12px', px: 2 }}>
-                  <Paper 
-                    elevation={6} 
-                    sx={{ 
-                      p: 3, 
+                  <Paper
+                    elevation={6}
+                    sx={{
+                      p: 3,
                       borderRadius: 4,
                       background: 'rgba(255, 255, 255, 0.05)',
                       backdropFilter: 'blur(10px)',
@@ -200,7 +217,7 @@ const ExperiencePage = () => {
                     <Typography variant="body1" sx={{ color: theme.palette.grey[300], mb: 2 }}>
                       {exp.description}
                     </Typography>
-                    
+
                     <Box sx={{ mb: 2 }}>
                       <Typography variant="subtitle2" sx={{ fontWeight: 600, color: '#fff' }}>
                         Key Achievements:
@@ -211,14 +228,14 @@ const ExperiencePage = () => {
                         ))}
                       </ul>
                     </Box>
-                    
+
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 2 }}>
                       {exp.technologies.map((tech, i) => (
-                        <Chip 
+                        <Chip
                           key={i}
                           label={tech}
-                          sx={{ 
-                            bgcolor: 'rgba(0,201,255,0.15)', 
+                          sx={{
+                            bgcolor: 'rgba(0,201,255,0.15)',
                             color: '#fff',
                             fontWeight: 600,
                             borderRadius: 1
@@ -233,12 +250,12 @@ const ExperiencePage = () => {
           </Timeline>
         </Box>
 
-        {/* Skills Section with Flexbox */}
+        {/* Skills Section */}
         <Box sx={{ mb: 10 }}>
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 4, color: '#fff' }}>
             Technical Expertise
           </Typography>
-          
+
           <Box sx={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -246,7 +263,7 @@ const ExperiencePage = () => {
             justifyContent: 'center'
           }}>
             {Object.entries(skills).map(([category, items], index) => (
-              <Box 
+              <Box
                 key={index}
                 sx={{
                   flex: `1 1 ${isMobile ? '100%' : isTablet ? 'calc(50% - 32px)' : 'calc(33% - 32px)'}`,
@@ -254,9 +271,9 @@ const ExperiencePage = () => {
                   maxWidth: 400
                 }}
               >
-                <Paper 
-                  sx={{ 
-                    p: 3, 
+                <Paper
+                  sx={{
+                    p: 3,
                     height: '100%',
                     borderRadius: 4,
                     background: 'rgba(255, 255, 255, 0.05)',
@@ -270,11 +287,11 @@ const ExperiencePage = () => {
                     }
                   }}
                 >
-                  <Typography 
-                    variant="h6" 
-                    sx={{ 
-                      mb: 3, 
-                      fontWeight: 700, 
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      mb: 3,
+                      fontWeight: 700,
                       color: '#92fe9d',
                       display: 'flex',
                       alignItems: 'center',
@@ -283,14 +300,14 @@ const ExperiencePage = () => {
                   >
                     {category.charAt(0).toUpperCase() + category.slice(1)}
                   </Typography>
-                  
+
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                     {items.map((skill, i) => (
-                      <Box 
-                        key={i} 
-                        sx={{ 
-                          display: 'flex', 
-                          alignItems: 'center', 
+                      <Box
+                        key={i}
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
                           gap: 2,
                           p: 1.5,
                           borderRadius: 2,
@@ -330,8 +347,8 @@ const ExperiencePage = () => {
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 3, color: '#fff' }}>
             Ready to build something amazing?
           </Typography>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             size="large"
             sx={{
               background: 'linear-gradient(45deg, #00c9ff, #92fe9d)',

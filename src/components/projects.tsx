@@ -1,25 +1,36 @@
 import React, { useState } from 'react';
-import { 
-  Box, Container, Typography, Chip, Button, 
+import {
+  Box, Container, Typography, Chip, Button,
   useTheme, useMediaQuery, Paper, Divider,
   IconButton
 } from '@mui/material';
-import { 
-  GitHub, Launch, Star, 
+import {
+  GitHub, Launch, Star,
   Visibility, ArrowRightAlt,
-  ArrowBack, ArrowForward 
+  ArrowBack, ArrowForward
 } from '@mui/icons-material';
 
-const ProjectsPage = () => {
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  technologies: string[];
+  category: string;
+  github: string;
+  demo: string;
+  stars: number;
+  views: number;
+}
+
+const ProjectsPage: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [filter, setFilter] = useState('all');
-  const [activeProject, setActiveProject] = useState(null);
-  const [currentPage, setCurrentPage] = useState(0);
-  
+  const [filter, setFilter] = useState<string>('all');
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+
   const projectsPerPage = isMobile ? 4 : 8;
-  
-  // Project categories
+
   const categories = [
     { id: 'all', label: 'All Projects' },
     { id: 'web', label: 'Web Apps' },
@@ -27,9 +38,8 @@ const ProjectsPage = () => {
     { id: 'api', label: 'APIs' },
     { id: 'database', label: 'Database' },
   ];
-  
-  // Project data
-  const projects = [
+
+  const projects: Project[] = [
     {
       id: 1,
       title: "E-Commerce Platform",
@@ -163,33 +173,29 @@ const ProjectsPage = () => {
       views: 1630
     }
   ];
-  
-  // Filter projects based on selected category
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === filter);
-  
-  // Paginate projects
+
+  const filteredProjects: Project[] = filter === 'all'
+    ? projects
+    : projects.filter((project: Project) => project.category === filter);
+
   const pageCount = Math.ceil(filteredProjects.length / projectsPerPage);
-  const paginatedProjects = filteredProjects.slice(
-    currentPage * projectsPerPage, 
+  const paginatedProjects: Project[] = filteredProjects.slice(
+    currentPage * projectsPerPage,
     (currentPage + 1) * projectsPerPage
   );
-  
-  // Handle project selection for detailed view
-  const handleProjectSelect = (project) => {
+
+  const handleProjectSelect = (project: Project): void => {
     setActiveProject(project);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  
-  // Handle pagination
-  const handlePageChange = (newPage) => {
+
+  const handlePageChange = (newPage: number): void => {
     setCurrentPage(newPage);
     window.scrollTo({ top: 500, behavior: 'smooth' });
   };
-  
+
   return (
-    <Box sx={{
+     <Box sx={{
       background: 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)',
       color: '#fff',
       minHeight: '100vh',

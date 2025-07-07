@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import type { MouseEvent } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -6,7 +7,6 @@ import {
   Button,
   IconButton,
   Drawer,
-  List,
   Typography,
   CssBaseline,
   useScrollTrigger,
@@ -30,20 +30,27 @@ import {
   EmailOutlined,
 } from '@mui/icons-material';
 
+// Define the nav link type
+type NavLink = {
+  id: string;
+  label: string;
+  icon: React.ReactNode;
+};
+
 const Navbar: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [activeLink, setActiveLink] = useState<string>('home');
-
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const openDropdown = Boolean(anchorEl);
 
-  const handleDrawerToggle = () => {
+  const openDropdown: boolean = Boolean(anchorEl);
+
+  const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen);
   };
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (sectionId: string): void => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -52,15 +59,15 @@ const Navbar: React.FC = () => {
     }
   };
 
-  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleMenuClick = (event: MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
+  const handleMenuClose = (): void => {
     setAnchorEl(null);
   };
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { id: 'home', label: 'Home', icon: <HomeOutlined /> },
     { id: 'experience', label: 'Experience', icon: <ExperienceIcon /> },
     { id: 'education', label: 'Education', icon: <SchoolOutlined /> },
@@ -238,6 +245,7 @@ const Navbar: React.FC = () => {
                 >
                   Contact
                 </Button>
+
                 <Menu
                   anchorEl={anchorEl}
                   open={openDropdown}
