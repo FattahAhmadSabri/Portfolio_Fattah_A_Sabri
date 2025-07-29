@@ -12,7 +12,6 @@ import {
   Terminal, DeveloperMode, Build, DataObject
 } from '@mui/icons-material';
 
-// Interfaces for type definitions
 interface Experience {
   period: string;
   company: string;
@@ -37,49 +36,50 @@ const ExperiencePage: React.FC = () => {
 
   const experiences: Experience[] = [
     {
-      period: "2021 - Present",
-      company: "Wattmonk Technologies",
-      role: "Associate Backend Developer",
-      description: "Leading backend development for enterprise SaaS applications. Designed and implemented microservices architecture handling 50K+ requests per minute.",
-      achievements: [
-        "Reduced API response time by 65% through query optimization",
-        "Implemented CI/CD pipeline reducing deployment time by 80%",
-        "Mentored 5 junior developers in best practices"
-      ],
-      technologies: ["Node.js", "Python", "Kubernetes", "RabbitMQ", "MongoDB", "Redis"]
-    },
-    {
-      period: "2019 - 2021",
-      company: "DataStream Inc.",
+      period: "2024 - Present",
+      company: "Fladdra Technologies",
       role: "Backend Developer",
-      description: "Developed and maintained RESTful APIs for data processing platform. Implemented real-time analytics features.",
-      achievements: [
-        "Designed scalable database architecture handling 10TB+ data",
-        "Implemented authentication system serving 1M+ users",
-        "Optimized ETL processes reducing execution time by 45%"
-      ],
-      technologies: ["Java", "Spring Boot", "PostgreSQL", "Kafka", "Docker", "AWS"]
-    },
-    {
-      period: "2017 - 2019",
-      company: "WebCore Systems",
-      role: "Junior Backend Developer",
       description: "Built backend services for e-commerce platform. Focused on payment processing and order management systems.",
       achievements: [
         "Developed fraud detection system reducing fraudulent transactions by 30%",
         "Created automated testing suite increasing test coverage to 85%",
         "Implemented caching strategy improving page load times by 40%"
       ],
-      technologies: ["PHP", "Laravel", "MySQL", "Redis", "JavaScript"]
+      technologies: ["Node.js", "Express.js","React", "MongoDB", "Postgres", "JavaScript"]
+    },
+   
+    {
+      period: "2024 - 2024",
+      company: "Freelancing.",
+      role: "Backend Developer",
+      description: "Developed and maintained RESTful APIs for data processing platform. Implemented real-time analytics features.",
+      achievements: [
+        "Designed scalable database architecture handling 1TB+ data",
+        "Implemented authentication system serving 100k+ users",
+        "Optimized ETL processes reducing execution time by 45%"
+      ],
+      technologies: ["Node.js", "Express.js", "MongoDB", "JavaScript"]
+    },
+     {
+      period: "2021 - 2024",
+      company: "Wattmonk Technologies",
+      role: "Associate Engineer",
+      description: "Leading backend development for enterprise SaaS applications. Designed and implemented microservices architecture handling 1K+ requests per minute.",
+      achievements: [
+        "Reduced API response time by 65% through query optimization",
+        "Implemented CI/CD pipeline reducing deployment time by 80%",
+      ],
+      technologies: ["Node.js", "JavaScript",   "MongoDB", "Express.js"]
     }
+    
   ];
 
   const skills: Skills = {
-    languages: ["JavaScript/Node.js", "Python", "Java", "Go", "PHP"],
-    frameworks: ["Express.js", "Django", "Spring Boot", "Flask", "Laravel"],
-    databases: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Elasticsearch"],
-    devops: ["Docker", "Kubernetes", "AWS", "Jenkins", "Terraform"],
-    tools: ["Git", "RabbitMQ", "Kafka", "GraphQL", "REST APIs"]
+    languages: ["JavaScript/Node.js","TypeScript", "Python"],
+    frameworks: ["Express.js", "Django", "React"],
+    databases: ["MongoDB", "PostgreSQL", "MySQL"],
+    // devops: ["Docker", "Kubernetes", "AWS", "Jenkins", "Terraform"],
+    tools: ["Git", "Postman", "GraphQL", "REST APIs"]
   };
 
   const techIcons: TechIcons = {
@@ -102,13 +102,12 @@ const ExperiencePage: React.FC = () => {
       color: '#fff',
       minHeight: '100vh',
       py: 8,
-      px: isMobile ? 2 : 4,
+      px: { xs: 2, sm: 4, md: 6 },
     }}>
       <Container maxWidth="lg">
-        {/* Page Header */}
         <Box sx={{ textAlign: 'center', mb: 8 }}>
           <Typography
-            variant={isMobile ? 'h4' : 'h2'}
+            variant={isMobile ? 'h4' : isTablet ? 'h3' : 'h2'}
             sx={{
               fontWeight: 800,
               mb: 2,
@@ -133,13 +132,12 @@ const ExperiencePage: React.FC = () => {
           }} />
         </Box>
 
-        {/* Timeline */}
         <Box sx={{ mb: 10 }}>
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 4, color: '#fff' }}>
             Professional Journey
           </Typography>
 
-          <Timeline position={isMobile ? "right" : "alternate"} sx={{ p: 0 }}>
+          <Timeline position={isMobile ? "right" : "alternate"} sx={{ px: isMobile ? 0 : 2 }}>
             {experiences.map((exp, index) => (
               <TimelineItem key={index}>
                 <TimelineOppositeContent
@@ -192,7 +190,7 @@ const ExperiencePage: React.FC = () => {
                   )}
                 </TimelineSeparator>
 
-                <TimelineContent sx={{ py: '12px', px: 2 }}>
+                <TimelineContent sx={{ py: isMobile ? 1 : 3, px: isMobile ? 1 : 2 }}>
                   <Paper
                     elevation={6}
                     sx={{
@@ -250,7 +248,6 @@ const ExperiencePage: React.FC = () => {
           </Timeline>
         </Box>
 
-        {/* Skills Section */}
         <Box sx={{ mb: 10 }}>
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 4, color: '#fff' }}>
             Technical Expertise
@@ -266,9 +263,14 @@ const ExperiencePage: React.FC = () => {
               <Box
                 key={index}
                 sx={{
-                  flex: `1 1 ${isMobile ? '100%' : isTablet ? 'calc(50% - 32px)' : 'calc(33% - 32px)'}`,
-                  minWidth: 300,
-                  maxWidth: 400
+                  flex: {
+                    xs: '1 1 100%',
+                    sm: '1 1 calc(50% - 32px)',
+                    md: '1 1 calc(33% - 32px)'
+                  },
+                  minWidth: 260,
+                  maxWidth: 400,
+                  width: '100%',
                 }}
               >
                 <Paper
@@ -342,9 +344,11 @@ const ExperiencePage: React.FC = () => {
           </Box>
         </Box>
 
-        {/* Call to Action */}
         <Box sx={{ textAlign: 'center', mt: 8 }}>
-          <Typography variant="h5" sx={{ fontWeight: 700, mb: 3, color: '#fff' }}>
+          <Typography
+            variant={isMobile ? 'h6' : 'h5'}
+            sx={{ fontWeight: 700, mb: isMobile ? 2 : 3, color: '#fff' }}
+          >
             Ready to build something amazing?
           </Typography>
           <Button
@@ -355,9 +359,9 @@ const ExperiencePage: React.FC = () => {
               color: '#000',
               fontWeight: 700,
               borderRadius: 50,
-              px: 6,
-              py: 1.5,
-              fontSize: '1.1rem',
+              px: isMobile ? 4 : 6,
+              py: isMobile ? 1 : 1.5,
+              fontSize: isMobile ? '1rem' : '1.1rem',
               boxShadow: '0 5px 15px rgba(0,0,0,0.3)',
               '&:hover': {
                 transform: 'translateY(-3px)',

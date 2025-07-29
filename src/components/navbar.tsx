@@ -200,7 +200,7 @@ const Navbar: React.FC = () => {
                   letterSpacing: 1,
                 }}
               >
-                Fattah Ahmad
+                Fattah
               </Typography>
             </Box>
 
@@ -260,7 +260,7 @@ const Navbar: React.FC = () => {
                   </MenuItem>
                   <MenuItem onClick={handleMenuClose}>
                     <PhoneAndroid sx={{ mr: 1 }} />
-                    +91-9876543210
+                    +91-9284603453
                   </MenuItem>
                 </Menu>
 

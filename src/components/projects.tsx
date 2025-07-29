@@ -44,12 +44,12 @@ const ProjectsPage: React.FC = () => {
       id: 1,
       title: "E-Commerce Platform",
       description: "A full-featured online shopping platform with payment integration, inventory management, and analytics dashboard.",
-      technologies: ["Node.js", "React", "MongoDB", "Stripe API", "Redis"],
+      technologies: ["Node.js", "React", "MongoDB", "Express.js"],
       category: "web",
       github: "#",
       demo: "#",
       stars: 128,
-      views: 2450
+      views: 450
     },
     {
       id: 2,
@@ -77,7 +77,7 @@ const ProjectsPage: React.FC = () => {
       id: 4,
       title: "Inventory Management System",
       description: "Enterprise inventory solution with barcode scanning, predictive analytics, and multi-warehouse support.",
-      technologies: ["Python", "Django", "PostgreSQL", "AWS", "Redis"],
+      technologies: ["TypeScript", "Node.js", "PostgreSQL", "Express.js"],
       category: "database",
       github: "#",
       demo: "#",
@@ -110,7 +110,7 @@ const ProjectsPage: React.FC = () => {
       id: 7,
       title: "Payment Processing API",
       description: "Secure payment gateway with multiple payment method support, fraud detection, and reconciliation.",
-      technologies: ["Java", "Spring Boot", "MySQL", "Kafka", "Redis"],
+      technologies: ["JaveScript", "Node.js", "MongoDb", "Express.js"],
       category: "api",
       github: "#",
       demo: "#",
@@ -121,7 +121,7 @@ const ProjectsPage: React.FC = () => {
       id: 8,
       title: "Customer Analytics Dashboard",
       description: "Data visualization platform with real-time analytics, customer segmentation, and predictive modeling.",
-      technologies: ["React", "D3.js", "Express.js", "MongoDB", "Redux"],
+      technologies: ["React", "D3.js", "Express.js", "MongoDB"],
       category: "database",
       github: "#",
       demo: "#",
@@ -804,7 +804,7 @@ const ProjectsPage: React.FC = () => {
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent'
                   }}>
-                    12+
+                    10+
                   </Typography>
                   <Typography variant="h6" sx={{ color: theme.palette.grey[300] }}>
                     Projects
@@ -818,7 +818,7 @@ const ProjectsPage: React.FC = () => {
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent'
                   }}>
-                    8K+
+                    2K+
                   </Typography>
                   <Typography variant="h6" sx={{ color: theme.palette.grey[300] }}>
                     GitHub Stars
@@ -832,7 +832,7 @@ const ProjectsPage: React.FC = () => {
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent'
                   }}>
-                    15+
+                    5+
                   </Typography>
                   <Typography variant="h6" sx={{ color: theme.palette.grey[300] }}>
                     Technologies

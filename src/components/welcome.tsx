@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Typography, Button, useTheme, useMediaQuery, Container } from '@mui/material';
 import { keyframes } from '@emotion/react';
 
 const gradientAnimation = keyframes`
@@ -19,7 +19,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ profileImage }) => {
   return (
     <Box
       sx={{
-        height: '100vh',
+        minHeight: '100vh', // ✅ Fix: allow height to grow on mobile
         display: 'flex',
         flexDirection: isMobile ? 'column' : 'row',
         justifyContent: 'space-between',
@@ -28,10 +28,11 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ profileImage }) => {
         backgroundSize: '400% 400%',
         animation: `${gradientAnimation} 15s ease infinite`,
         color: 'white',
-        px: 6,
-        py: 8, // increased padding to shift content slightly up
+        px: 3,
+        py: 6,
         position: 'relative',
-        overflow: 'hidden',
+        overflowX: 'hidden',
+        overflowY: isMobile ? 'auto' : 'hidden', // ✅ allow scroll on small screens
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -67,146 +68,151 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ profileImage }) => {
         />
       ))}
 
-      {/* Text Content */}
-      <Box
+      {/* Content */}
+      <Container
         sx={{
-          position: 'relative',
-          zIndex: 1,
-          flex: 1,
-          maxWidth: isMobile ? '100%' : '55%',
-          textAlign: isMobile ? 'center' : 'left',
-          pr: isMobile ? 0 : 6,
-          mb: isMobile ? 4 : 0,
-        }}
-      >
-        <Typography
-          variant="h3"
-          component="h1"
-          sx={{
-            fontWeight: 700,
-            mb: 2,
-            textShadow: '0px 4px 10px rgba(0,0,0,0.3)',
-            lineHeight: 1.2
-          }}
-        >
-          Fattah Ahmad Sabri
-        </Typography>
-
-        <Typography
-          variant="h5"
-          component="h2"
-          sx={{
-            fontWeight: 400,
-            color: theme.palette.grey[200],
-            fontStyle: 'italic',
-            textShadow: '0px 2px 4px rgba(0,0,0,0.3)',
-            mb: 3
-          }}
-        >
-          Backend Developer | API Architect | Technical Problem Solver
-        </Typography>
-
-        <Typography
-          variant="body1"
-          sx={{
-            fontSize: '1.1rem',
-            lineHeight: 1.7,
-            maxWidth: 600,
-            mb: 4,
-            textShadow: '0px 1px 3px rgba(0,0,0,0.5)',
-          }}
-        >
-          I specialize in building robust backend infrastructures, scalable APIs, and efficient data flows.
-          My work blends performance with clean code, and I aim to solve real-world problems with clarity and precision.
-        </Typography>
-
-        <Button
-          variant="outlined"
-          size="large"
-          sx={{
-            color: 'white',
-            borderColor: 'white',
-            borderRadius: 50,
-            px: 6,
-            py: 1.5,
-            fontWeight: 700,
-            letterSpacing: '0.1em',
-            '&:hover': {
-              backgroundColor: 'rgba(255,255,255,0.1)',
-              borderWidth: 2
-            }
-          }}
-        >
-          EXPLORE PORTFOLIO
-        </Button>
-      </Box>
-
-      {/* Image & Quote Section */}
-      <Box
-        sx={{
-          position: 'relative',
-          zIndex: 1,
-          flex: 1,
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
+          flexDirection: isMobile ? 'column' : 'row',
           alignItems: 'center',
-          maxWidth: isMobile ? '100%' : '40%',
-          gap: 3
+          justifyContent: 'space-between',
+          zIndex: 1
         }}
+        maxWidth="lg"
       >
-        {/* Profile Image */}
+        {/* Text */}
         <Box
-          component="img"
-          src={profileImage || '/image/fas.jpeg'}
-          alt="Fattah Ahmad Sabri"
           sx={{
-            width: isMobile ? '80%' : '80%',
-            maxWidth: 300,
-            height: 'auto',
-            objectFit: 'cover',
-            borderRadius: '24px',
-            boxShadow: '0 6px 18px rgba(0,0,0,0.3)',
-            transition: 'transform 0.3s ease',
-            '&:hover': {
-              transform: 'scale(1.02)'
-            }
+            flex: 1,
+            textAlign: isMobile ? 'center' : 'left',
+            mb: isMobile ? 6 : 0,
+            pr: isMobile ? 0 : 6,
           }}
-        />
+        >
+          <Typography
+            variant="h3"
+            component="h1"
+            sx={{
+              fontWeight: 700,
+              mb: 2,
+              textShadow: '0px 4px 10px rgba(0,0,0,0.3)',
+              lineHeight: 1.2
+            }}
+          >
+            Fattah Ahmad Sabri
+          </Typography>
 
-        {/* Stylish Quote */}
-        <Box sx={{ textAlign: 'center', maxWidth: 340 }}>
+          <Typography
+            variant="h5"
+            component="h2"
+            sx={{
+              fontWeight: 400,
+              color: theme.palette.grey[200],
+              fontStyle: 'italic',
+              textShadow: '0px 2px 4px rgba(0,0,0,0.3)',
+              mb: 3
+            }}
+          >
+            Backend Developer | API Architect | Technical Problem Solver
+          </Typography>
+
           <Typography
             variant="body1"
             sx={{
-              fontWeight: 500,
-              fontStyle: 'italic',
-              color: theme.palette.grey[100],
-              lineHeight: 1.6,
-              textShadow: '0px 2px 4px rgba(0,0,0,0.4)'
+              fontSize: '1.1rem',
+              lineHeight: 1.7,
+              maxWidth: 600,
+              mx: isMobile ? 'auto' : 0,
+              mb: 4,
+              textShadow: '0px 1px 3px rgba(0,0,0,0.5)',
             }}
           >
-            “The backend is the <span style={{ color: '#90caf9' }}>brain</span> — it must be
-            <span style={{ color: '#a5d6a7' }}> smart</span>, 
-            <span style={{ color: '#ffcc80' }}> efficient</span>, and 
-            <span style={{ color: '#f48fb1' }}> quiet</span>.
-            A great backend doesn’t seek attention — it just works and scales with precision.”
+            I specialize in building robust backend infrastructures, scalable APIs, and efficient data flows.
+            My work blends performance with clean code, and I aim to solve real-world problems with clarity and precision.
           </Typography>
 
-          <Typography
-            variant="caption"
+          <Button
+            variant="outlined"
+            size="large"
             sx={{
-              color: theme.palette.grey[300],
-              fontStyle: 'normal',
-              mt: 1,
-              display: 'block',
-              textShadow: '0px 1px 3px rgba(0,0,0,0.3)'
+              color: 'white',
+              borderColor: 'white',
+              borderRadius: 50,
+              px: 6,
+              py: 1.5,
+              fontWeight: 700,
+              letterSpacing: '0.1em',
+              '&:hover': {
+                backgroundColor: 'rgba(255,255,255,0.1)',
+                borderWidth: 2
+              }
             }}
           >
-             Fattah Ahmad Sabri
-          </Typography>
+            EXPLORE PORTFOLIO
+          </Button>
         </Box>
-      </Box>
+
+        {/* Image & Quote */}
+        <Box
+          sx={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: 3
+          }}
+        >
+          <Box
+            component="img"
+            src={profileImage || '/image/fas.jpeg'}
+            alt="Fattah Ahmad Sabri"
+            sx={{
+              width: isMobile ? '80%' : '80%',
+              maxWidth: 300,
+              height: 'auto',
+              objectFit: 'cover',
+              borderRadius: '24px',
+              boxShadow: '0 6px 18px rgba(0,0,0,0.3)',
+              transition: 'transform 0.3s ease',
+              '&:hover': {
+                transform: 'scale(1.02)'
+              }
+            }}
+          />
+
+          <Box sx={{ textAlign: 'center', maxWidth: 340 }}>
+            <Typography
+              variant="body1"
+              sx={{
+                fontWeight: 500,
+                fontStyle: 'italic',
+                color: theme.palette.grey[100],
+                lineHeight: 1.6,
+                textShadow: '0px 2px 4px rgba(0,0,0,0.4)'
+              }}
+            >
+              “The backend is the <span style={{ color: '#90caf9' }}>brain</span> — it must be
+              <span style={{ color: '#a5d6a7' }}> smart</span>, 
+              <span style={{ color: '#ffcc80' }}> efficient</span>, and 
+              <span style={{ color: '#f48fb1' }}> quiet</span>.
+              A great backend doesn’t seek attention — it just works and scales with precision.”
+            </Typography>
+
+            <Typography
+              variant="caption"
+              sx={{
+                color: theme.palette.grey[300],
+                fontStyle: 'normal',
+                mt: 1,
+                display: 'block',
+                textShadow: '0px 1px 3px rgba(0,0,0,0.3)'
+              }}
+            >
+              Fattah Ahmad Sabri
+            </Typography>
+          </Box>
+        </Box>
+      </Container>
     </Box>
   );
 };
